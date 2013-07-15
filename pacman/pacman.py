@@ -665,3 +665,12 @@ if __name__ == '__main__':
   # import cProfile
   # cProfile.run("runGames( **args )")
   pass
+
+import graphicsDisplay
+#agentType = loadAgent('GoWestAgent','')
+#agetn = agentType()
+#agentType = loadAgent('SearchAgent', False)
+#agent = agentType(fn='tinyMazeSearch')
+agent = loadAgent('GoAgent', False)()
+runGames( layout.getLayout('tinyMaze'), agent, [], 
+          graphicsDisplay.PacmanGraphics(1.0, frameTime = 0.1), 1, False)

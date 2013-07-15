@@ -36,6 +36,25 @@ import time
 import search
 import searchAgents
 
+from random import randint  
+
+class GoAgent(Agent):
+  "DRuby: An agent makes random moves."
+  def getAction(self, state):
+    "The agent receives a GameState (defined in pacman.py)."
+    c = randint(1,4)
+    
+    if Directions.WEST in state.getLegalPacmanActions() and c == 1:
+      return Directions.WEST
+    elif Directions.EAST in state.getLegalPacmanActions() and c==2:
+      return Directions.EAST
+    elif Directions.SOUTH in state.getLegalPacmanActions()and c==3:
+      return Directions.SOUTH
+    elif Directions.NORTH in state.getLegalPacmanActions() and c==4:
+      return Directions.NORTH
+    else:
+      return Directions.STOP
+    
 class GoWestAgent(Agent):
   "An agent that goes West until it can't."
   
