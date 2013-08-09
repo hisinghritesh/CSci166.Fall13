@@ -7,7 +7,7 @@ from search import *
 
 class PuzzleApp(Problem):
     def __init__(self,master,puzzle,goalState):
-        self.w = 200
+        self.w = 100
         self.s = 10
         self.tx= 50
         self.ty= 50
