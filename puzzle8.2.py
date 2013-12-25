@@ -88,9 +88,9 @@ class PuzzleApp(Problem):
          for i in range(len(x)-1):
              moves.insert(0,self.find_move(x[i].state, x[i+1].state))
          print moves
-         outstr = str(moves)
+         outstr = str(count)
          self.solution_display.grid_forget()
-         self.solution_display= Label(self.frame,text="solution: "+outstr,font=self.customFont)
+         self.solution_display= Label(self.frame,text="count: "+outstr,font=self.customFont)
          self.solution_display.grid(row=5,columnspan=20)
          self.frame.update()
          sleep(0.5)
@@ -234,8 +234,10 @@ class PuzzleApp(Problem):
     
 #Main function
 s1 = [[1,2,3],[4,5,6],[0,7,8]]
+s2 = [[1, 3, 0], [4, 2, 5], [7, 8, 6]]
+s3 = [[0, 1, 5], [7, 3, 6], [2, 4, 8]]
 examplePuzzle = [[2,1,6],[0,4,8],[7,5,3]]
 goalState = [[1,2,3],[4,5,6],[7,8,0]]
 root = Tk()
-app = PuzzleApp(root,s1,goalState)
+app = PuzzleApp(root,s3,goalState)
 root.mainloop()

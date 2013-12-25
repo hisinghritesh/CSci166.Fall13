@@ -178,6 +178,7 @@ def depth_limited_search(problem, limit=50):
 def iterative_deepening_search(problem):
     "[Fig. 3.13]"
     for depth in xrange(sys.maxint):
+        print '@depth= ' , depth
         result = depth_limited_search(problem, depth)
         if result is not 'cutoff':
             return result
