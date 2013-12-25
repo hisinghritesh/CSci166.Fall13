@@ -79,7 +79,10 @@ class PuzzleApp(Problem):
  #       print actions
  #       for move in ['LEFT','UP','RIGHT','RIGHT']:
  #          self.update_puzzle(self.doMove(move))
-         node = breadth_first_tree_search(self)
+         count = 0
+         #[node, count] = breadth_first_tree_search(self)
+         node = iterative_deepening_search(self)
+         print 'node count = ', count
          moves = []
          x = node.path()
          for i in range(len(x)-1):

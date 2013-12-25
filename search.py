@@ -112,11 +112,13 @@ def tree_search(problem, fringe):
     """Search through the successors of a problem to find a goal.
     The argument fringe should be an empty queue.
     Don't worry about repeated paths to a state. [Fig. 3.8]"""
+    count = 0
     fringe.append(Node(problem.initial))
     while fringe:
         node = fringe.pop()
+        count += 1
         if problem.goal_test(node.state):
-            return node
+            return [node, count]
         fringe.extend(node.expand(problem))
     return None
 
