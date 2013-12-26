@@ -157,19 +157,21 @@ def depth_limited_search(problem, limit=50):
     "[Fig. 3.12]"
     def recursive_dls(node, problem, limit):
         cutoff_occurred = False
+        count = 1
         if problem.goal_test(node.state):
-            return node
+            return [node, count]
         elif node.depth == limit:
-            return 'cutoff'
+            return ['cutoff', count]
         else:
             for successor in node.expand(problem):
-                result = recursive_dls(successor, problem, limit)
+                [result, c1] = recursive_dls(successor, problem, limit)
+                count += c1
                 if result == 'cutoff':
                     cutoff_occurred = True
                 elif result != None:
-                    return result
+                    return [result, count]
         if cutoff_occurred:
-            return 'cutoff'
+            return ['cutoff', count]
         else:
             return None
     # Body of depth_limited_search:
@@ -177,11 +179,13 @@ def depth_limited_search(problem, limit=50):
 
 def iterative_deepening_search(problem):
     "[Fig. 3.13]"
+    count = 0
     for depth in xrange(sys.maxint):
-        print '@depth= ' , depth
-        result = depth_limited_search(problem, depth)
+        print '@depth, nodes= ' , depth, count
+        [result, c1] = depth_limited_search(problem, depth)
+        count += c1
         if result is not 'cutoff':
-            return result
+            return [result, count]
 
 #______________________________________________________________________________
 # Informed (Heuristic) Search

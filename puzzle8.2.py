@@ -81,7 +81,7 @@ class PuzzleApp(Problem):
  #          self.update_puzzle(self.doMove(move))
          count = 0
          #[node, count] = breadth_first_tree_search(self)
-         node = iterative_deepening_search(self)
+         [node, count] = iterative_deepening_search(self)
          print 'node count = ', count
          moves = []
          x = node.path()
