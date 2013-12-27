@@ -53,7 +53,7 @@ class PuzzleApp(Problem):
                 self.goalPieces[i][j].grid(row=i+1, column=j+3)
         self.button = Button(self.frame, text="Find Solution", command=self.run_simulation, font=self.customFont)
         self.button.grid(row=4,columnspan=6)
-        self.solution_display= Label(self.frame,text="Goal State", font=self.customFont)
+        self.solution_display= Label(self.frame,text="count: ", font=self.customFont)
         self.solution_display.grid(row=5,columnspan=20)
     def find_move(self,state1, state2):
         print state1, state2
@@ -235,15 +235,22 @@ class PuzzleApp(Problem):
 
     
 #Main function
+
+# Search Function Choice
 #searchFn = breadth_first_tree_search
 searchFn = iterative_deepening_search
 
+# Start States
 s1 = [[1,2,3],[4,5,6],[0,7,8]]
 s2 = [[1, 3, 0], [4, 2, 5], [7, 8, 6]]
 s3 = [[0, 1, 5], [7, 3, 6], [2, 4, 8]]
 s4 = [[7, 1, 5], [0, 3, 6], [2, 4, 8]]
+s5 = [[7, 1, 5], [2, 3, 6], [0, 4, 8]]
 examplePuzzle = [[2,1,6],[0,4,8],[7,5,3]]
+
+startstate = s1
+
 goalState = [[1,2,3],[4,5,6],[7,8,0]]
 root = Tk()
-app = PuzzleApp(root,s3,goalState,searchFn)
+app = PuzzleApp(root,startstate,goalState,searchFn)
 root.mainloop()
