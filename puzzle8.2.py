@@ -6,7 +6,7 @@ from time import sleep
 from search import *
 
 class PuzzleApp(Problem):
-    def __init__(self,master,puzzle,goalState):
+    def __init__(self,master,puzzle,goalState, searchFn):
         self.w = 100
         self.s = 10
         self.tx= 50
@@ -20,6 +20,7 @@ class PuzzleApp(Problem):
         self.goalTitle.grid(row=0,column=4)
         self.puzzle = puzzle
         self.goalState = goalState
+        self.searchFn = searchFn
         self.initial = puzzle ;  self.goal = goalState
         #self.puzzlePieces = [[],[],[]]
         #self.goalPieces = [[],[],[]]
@@ -81,7 +82,8 @@ class PuzzleApp(Problem):
  #          self.update_puzzle(self.doMove(move))
          count = 0
          #[node, count] = breadth_first_tree_search(self)
-         [node, count] = iterative_deepening_search(self)
+         #[node, count] = iterative_deepening_search(self)
+         [node, count] = self.searchFn(self)
          print 'node count = ', count
          moves = []
          x = node.path()
@@ -233,11 +235,15 @@ class PuzzleApp(Problem):
 
     
 #Main function
+#searchFn = breadth_first_tree_search
+searchFn = iterative_deepening_search
+
 s1 = [[1,2,3],[4,5,6],[0,7,8]]
 s2 = [[1, 3, 0], [4, 2, 5], [7, 8, 6]]
 s3 = [[0, 1, 5], [7, 3, 6], [2, 4, 8]]
+s4 = [[7, 1, 5], [0, 3, 6], [2, 4, 8]]
 examplePuzzle = [[2,1,6],[0,4,8],[7,5,3]]
 goalState = [[1,2,3],[4,5,6],[7,8,0]]
 root = Tk()
-app = PuzzleApp(root,s3,goalState)
+app = PuzzleApp(root,s3,goalState,searchFn)
 root.mainloop()
