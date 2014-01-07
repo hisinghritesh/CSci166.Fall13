@@ -13,27 +13,48 @@ def minimax_decision(state, game):
     forward all the way to the terminal states. [Fig. 6.4]"""
 
     player = game.to_move(state)
-
+    node_count = 0
     def max_value(state):
         if game.terminal_test(state):
-            return game.utility(state, player)
+            return game.utility(state, player), 0
         v = -infinity
+        count_total = 0
         for (a, s) in game.successors(state):
-            v = max(v, min_value(s))
-        return v
+            count_total += 1
+            v_out, count = min_value(s)
+            v = max(v, v_out)            
+            count_total += count
+        return v, count_total
 
     def min_value(state):
         if game.terminal_test(state):
-            return game.utility(state, player)
+            return game.utility(state, player), 0
         v = infinity
+        count_total = 0
         for (a, s) in game.successors(state):
-            v = min(v, max_value(s))
-        return v
+            count_total += 1
+            v_out, count = max_value(s)
+            v = min(v, v_out)
+            count_total += count
+        return v, count_total
 
     # Body of minimax_decision starts here:
-    action, state = argmax(game.successors(state),
-                           lambda ((a, s)): min_value(s))
-    return action
+    ###action, state = argmax(game.successors(state),
+    ###                       lambda ((a, s)): min_value(s))
+    succ_list = game.successors(state)
+    node_count += len(succ_list)
+
+    max_decision_value = -infinity
+    max_state = []
+    max_action = []
+    for (a,s) in succ_list:
+        decision_value, count = min_value(s)
+        node_count += count
+        if decision_value > max_decision_value:
+            max_state = s
+            max_decision_value = decision_value
+            max_action = a
+    return max_action, node_count
 
 
 #______________________________________________________________________________

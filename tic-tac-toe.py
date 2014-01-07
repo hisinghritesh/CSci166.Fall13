@@ -99,13 +99,15 @@ def playgame_test():
     ##print "move is:", move
     while not game.terminal_test(state):
         if state.to_move == 'O':
-            move = input("Enter move '(X,Y)': ")
+            move = input("Enter move '(Row, Col)': ")
         else:
             print "Computer searching for move..."
-            move = minimax_decision(state, game)
+            move, count = minimax_decision(state, game)
         print "move is:", move
+        print "search required:", count
         state = game.make_move(move, state)
         game.display(state)
         print state
 
+playgame_test()
 
